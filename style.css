@@ -23,35 +23,11 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: var(--secondary-color);
+    background-color: var(--dark-color);
     color: var(--light-color);
     line-height: 1.6;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-header {
-    background-color: var(--dark-color);
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo i {
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-right: 15px;
+    min-height: 100vh;
+    margin: 0;
 }
 
 h1, h2, h3, h4 {
@@ -72,12 +48,12 @@ h2 {
 }
 
 .section-container {
-    background-color: var(--dark-color);
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    padding: 40px 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
+
 
 .hidden {
     display: none !important;
@@ -342,7 +318,7 @@ button {
 .goal-buttons {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .goals-history-container {
@@ -554,10 +530,6 @@ button {
 }
 /* Responsividade */
 @media (max-width: 768px) {
-    .container {
-        padding: 10px;
-    }
-    
     .teams-container {
         flex-direction: column;
     }
@@ -582,15 +554,15 @@ button {
     
     .goal-buttons {
         flex-direction: row;
-        gap: 5px;
-        justify-content: center;
+        gap: 10px;
+        
     }
     
     .goal-btn {
         flex: 1;
-        max-width: 150px; /* Limita o tamanho para caberem lado a lado */
+        max-width: none; /* Não Limita o tamanho do botão */
         font-size: 1rem; /* Mantendo o mesmo tamanho dos botões do timer */
-        padding: 10px;
+        padding: 15px;
     }
     
     .score-display {
@@ -647,13 +619,7 @@ button {
     }
 }
 
-footer {
-    text-align: center;
-    margin-top: 30px;
-    padding: 20px;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.9rem;
-}
+
 
 /* Estilos para os cartões de time com borda colorida */
 .team-config.team-red-border {
@@ -704,9 +670,9 @@ footer {
 .teams-wins-container {
     margin: 20px 0;
     padding: 15px;
-    background-color: rgba(52, 73, 94, 0.3);
+    background-color: var(--secondary-color); //rgba(52, 73, 94, 0.3);
     border-radius: 8px;
-    border: 1px solid rgba(236, 240, 241, 0.1);
+    border: 0px solid rgba(236, 240, 241, 0.1);
 }
 
 .teams-wins-display {
@@ -799,15 +765,15 @@ footer {
     
     /* Ajustes para telas muito pequenas - mantendo espaçamento adequado */
     .goal-buttons {
-        padding: 0 10px; /* Adiciona padding nas laterais */
-        gap: 10px; /* Aumenta o gap entre os botões */
+        padding: 0 5px; /* Adiciona padding nas laterais */
+        gap: 30px; /* Aumenta o gap entre os botões */
     }
     
     .goal-btn {
         flex: 1;
         min-width: 0; /* Remove min-width para permitir flexibilidade */
         max-width: none; /* Remove max-width para permitir que os botões se ajustem */
-        font-size: 1rem; /* Mantendo o mesmo tamanho dos botões do timer */
+        font-size: 1.2rem; /* Mantendo o mesmo tamanho dos botões do timer */
         padding: 12px 8px;
         margin: 0; /* Remove margin para evitar overflow */
     }
@@ -833,5 +799,110 @@ footer {
 
 .team-stats-playtime i {
     margin-right: 0.4rem;
+}
+
+
+
+/* Estilos para a tela de boas-vindas */
+#welcome-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Ocupa a altura total da viewport */
+    background-color: var(--dark-color); /* Fundo azul escuro */
+    padding: 25px;
+    text-align: center;
+}
+
+#welcome-screen .section-content {
+    color: var(--light-color);
+    max-width: none;
+    width: 100%;
+}
+
+#welcome-screen h2 {
+    color: var(--light-color);
+    margin-bottom: 10px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+#welcome-screen h2 .highlight {
+    color: var(--primary-color); /* Azul claro para destaque */
+}
+
+#welcome-screen p {
+    color: #b0bec5; /* Cinza claro para subtítulo */
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.welcome-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.welcome-buttons .primary-btn,
+.welcome-buttons .secondary-btn {
+    width: 100%;
+    max-width: 300px;
+    padding: 15px 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.welcome-buttons .primary-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.welcome-buttons .primary-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.welcome-buttons .secondary-btn {
+    background-color: var(--light-color);
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+}
+
+.welcome-buttons .secondary-btn:hover {
+    background-color: var(--secondary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+    #welcome-screen .section-content {
+        margin: 20px;
+        padding: 30px 20px;
+    }
+    
+    #welcome-screen h2 {
+        font-size: 2rem;
+    }
+    
+    .welcome-buttons .primary-btn,
+    .welcome-buttons .secondary-btn {
+        font-size: 1rem;
+        padding: 12px 20px;
+    }
 }
 

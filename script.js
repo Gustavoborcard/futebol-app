@@ -130,6 +130,8 @@ function initializeDataPersistence() {
 }
 
 // Função para criar o modal de boas-vindas (sem botão de reset na interface)
+// COMENTADO: Substituído pela nova seção welcome-screen
+/*
 function createWelcomeModalAndResetButton() {
     // Criar o modal de boas-vindas
     const welcomeModal = document.createElement("div");
@@ -165,8 +167,11 @@ function createWelcomeModalAndResetButton() {
     
     document.head.appendChild(style);
 }
+*/
 
 // Função para mostrar o modal de boas-vindas
+// COMENTADO: Substituído pela nova seção welcome-screen
+/*
 function showWelcomeModal() {
     const welcomeModal = document.getElementById("welcome-modal");
     const welcomeOptions = document.getElementById("welcome-options");
@@ -217,6 +222,7 @@ function showWelcomeModal() {
         document.getElementById(section).classList.add("hidden");
     });
 }
+*/
 
 // --- Fim Funções de Persistência ---
 
@@ -235,6 +241,7 @@ originalBackgroundImage.src = "images/background.jpeg";
 // Função auxiliar para mostrar uma seção específica e esconder as demais
 function showSection(sectionId) {
     const sections = [
+        "welcome-screen",
         "team-setup",
         "match-setup",
         "match-in-progress",
@@ -283,16 +290,45 @@ function resetTeamSetupUI() {
 
 // Elementos DOM
 document.addEventListener("DOMContentLoaded", function () {
-    // Criar elementos HTML para o modal de boas-vindas (sem botão de reset)
-    createWelcomeModalAndResetButton();
-    
     // Implementar a persistência de dados
     initializeDataPersistence();
     
-    // Verificar se há dados salvos e mostrar modal de boas-vindas
-    setTimeout(() => {
-        showWelcomeModal();
-    }, 500);
+    // Event listeners para os novos botões da welcome-screen
+    const continueBtn = document.getElementById("continue-btn");
+    const newCountBtn = document.getElementById("new-count-btn");
+    
+    // Esconder o botão 'Continuar Contagem' por padrão
+    if (continueBtn) {
+        continueBtn.classList.add('hidden');
+    }
+
+    if (!loadDataFromLocalStorage()) {
+        showSection("welcome-screen");
+    } else {
+        // Se há dados salvos, mostrar o botão 'Continuar Contagem'
+        if (continueBtn) {
+            continueBtn.classList.remove('hidden');
+        }
+        showSection("welcome-screen"); // Sempre mostrar a welcome-screen primeiro se houver dados
+    }
+    
+    if (continueBtn) {
+        continueBtn.addEventListener("click", () => {
+            if (teams.length === 3) {
+                showSection("match-setup");
+                updateTeamSelects();
+            } else {
+                showSection("team-setup");
+            }
+        });
+    }
+    
+    if (newCountBtn) {
+        newCountBtn.addEventListener("click", () => {
+            resetAllData();
+            showSection("team-setup");
+        });
+    }
     // Botões de configuração de times
     const addPlayerBtns = document.querySelectorAll(".add-player-btn");
     const saveTeamsBtn = document.getElementById("save-teams-btn");
